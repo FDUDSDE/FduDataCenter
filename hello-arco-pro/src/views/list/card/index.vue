@@ -19,7 +19,7 @@
                   <TheService />
                 </a-tab-pane>
                 <a-tab-pane key="4" :title="$t('cardList.tab.title.preset')">
-                  <RulesPreset />
+                  <QualityInspection />
                 </a-tab-pane>
               </a-tabs>
             </a-col>

@@ -14,7 +14,7 @@ const LIST: AppRouteRecordRaw = {
   children: [
     {
       path: 'search-table', // The midline path complies with SEO specifications
-      name: 'SearchTable',
+      name: 'Search',
       component: () => import('@/views/list/search-table/index.vue'),
       meta: {
         locale: 'menu.list.searchTable',
@@ -23,15 +23,25 @@ const LIST: AppRouteRecordRaw = {
       },
     },
     {
-      path: 'card',
-      name: 'Card',
-      component: () => import('@/views/list/card/index.vue'),
+      path: 'search-table1', // The midline path complies with SEO specifications
+      name: 'Search1',
+      component: () => import('@/views/list/search-table1/index.vue'),
       meta: {
-        locale: 'menu.list.cardList',
+        locale: '高级检索',
         requiresAuth: true,
         roles: ['*'],
       },
     },
+    // {
+    //   path: 'card',
+    //   name: 'Card',
+    //   component: () => import('@/views/list/card/index.vue'),
+    //   meta: {
+    //     locale: 'menu.list.cardList',
+    //     requiresAuth: true,
+    //     roles: ['*'],
+    //   },
+    // },
   ],
 };
 

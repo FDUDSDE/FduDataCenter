@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="container">
     <Breadcrumb :items="['menu.dashboard', 'menu.dashboard.monitor']" />
     <div class="layout">
@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-</template>
+</template> -->
 
 <script lang="ts" setup>
   import ChatPanel from './components/chat-panel.vue';

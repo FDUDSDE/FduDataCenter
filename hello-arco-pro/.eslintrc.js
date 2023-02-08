@@ -66,5 +66,7 @@ module.exports = {
     'no-param-reassign': 0,
     'prefer-regex-literals': 0,
     'import/no-extraneous-dependencies': 0,
+    "prettier/prettier": "off",
+    '@typescript-eslint/no-var-requires': 0
   },
 };

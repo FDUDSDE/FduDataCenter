@@ -1,7 +1,7 @@
 <template>
   <a-card
     class="general-card"
-    :title="$t('workplace.recently.visited')"
+    :title="$t('workplace.management')"
     :header-style="{ paddingBottom: '0' }"
     :body-style="{ paddingTop: '26px' }"
   >

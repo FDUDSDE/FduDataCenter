@@ -7,33 +7,33 @@ import setupMock, { successResponseWrap } from '@/utils/setup-mock';
 const textList = [
   {
     key: 1,
-    clickNumber: '346.3w+',
-    title: '经济日报：财政政策要精准提升…',
+    clickNumber: '346.3k+',
+    title: '学生基本信息',
     increases: 35,
   },
   {
     key: 2,
-    clickNumber: '324.2w+',
-    title: '双12遇冷，消费者厌倦了电商平…',
-    increases: 22,
+    clickNumber: '341.3k+',
+    title: '教职工基本信息',
+    increases: 35,
   },
   {
     key: 3,
-    clickNumber: '318.9w+',
-    title: '致敬坚守战“疫”一线的社区工作…',
-    increases: 9,
+    clickNumber: '246.3k+',
+    title: '教师基本信息',
+    increases: 35,
   },
   {
     key: 4,
-    clickNumber: '257.9w+',
-    title: '普高还是职高？家长们陷入选择…',
-    increases: 17,
+    clickNumber: '146.3k+',
+    title: '科研成果数据集',
+    increases: 35,
   },
   {
     key: 5,
-    clickNumber: '124.2w+',
-    title: '人民快评：没想到“浓眉大眼”的…',
-    increases: 37,
+    clickNumber: '116.3k+',
+    title: '本专科生基本信息',
+    increases: 35,
   },
 ];
 const imageList = [

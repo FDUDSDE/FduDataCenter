@@ -16,7 +16,7 @@ setupMock({
       if (isLogin()) {
         const role = window.localStorage.getItem('userRole') || 'admin';
         return successResponseWrap({
-          name: '王立群',
+          name: 'dsfuis',
           avatar:
             '//lf1-xgcdn-tos.pstatp.com/obj/vcloud/vadmin/start.8e0e4855ee346a46ccff8ff3e24db27b.png',
           email: 'wangliqun@email.com',
@@ -28,9 +28,9 @@ setupMock({
           locationName: '北京',
           introduction: '人潇洒，性温存',
           personalWebsite: 'https://www.arco.design',
-          phone: '150****0000',
-          registrationDate: '2013-05-10 12:10:00',
-          accountId: '15012312300',
+          phone: '13893725981',
+          registrationDate: '2021-06-30 12:10:00',
+          accountId: '2489372598 ',
           certification: 1,
           role,
         });

@@ -6,61 +6,161 @@ const qualityInspectionList: ServiceRecord[] = [
   {
     id: 1,
     name: 'quality',
-    title: '视频类-历史导入',
-    description: '2021-10-12 00:00:00',
+    title: '学生信息',
+    description: '2021-10-12 00:00:00 最后更新',
     data: [
       {
-        label: '待质检数',
-        value: '120',
+        label: '数据清单',
+        value: '15 个',
       },
       {
-        label: '积压时长',
-        value: '60s',
+        label: '离线文件',
+        value: '11 个',
       },
-      {
-        label: '待抽检数',
-        value: '0',
-      },
+      // {
+      //   label: '待抽检数',
+      //   value: '0',
+      // },
     ],
   },
   {
     id: 2,
     name: 'quality',
-    title: '图文类-图片版权',
-    description: '2021-12-11 18:30:00',
+    title: '导师基本信息',
+    description: '2021-12-11 18:30:00 最后更新',
     data: [
       {
-        label: '待质检数',
-        value: '120',
+        label: '数据清单',
+        value: '1个',
       },
       {
-        label: '积压时长',
-        value: '60s',
+        label: '离线文件',
+        value: '0个',
       },
-      {
-        label: '待抽检数',
-        value: '0',
-      },
+      // {
+      //   label: '待抽检数',
+      //   value: '0',
+      // },
     ],
   },
   {
     id: 3,
     name: 'quality',
-    title: '图文类-高清图片',
-    description: '2021-10-15 08:10:00',
+    title: '职工信息',
+    description: '2021-10-15 08:10:00 最后更新',
     data: [
       {
-        label: '待质检数',
-        value: '120',
+        label: '数据清单',
+        value: '1个',
       },
       {
-        label: '积压时长',
-        value: '60s',
+        label: '离线文件',
+        value: '0个',
+      },
+      // {
+      //   label: '待抽检数',
+      //   value: '0',
+      // },
+    ],
+  },
+  {
+    id: 4,
+    name: 'quality',
+    title: '住宿信息',
+    description: '2021-10-15 08:10:00 最后更新',
+    data: [
+      {
+        label: '数据清单',
+        value: '3个',
       },
       {
-        label: '待抽检数',
-        value: '0',
+        label: '离线文件',
+        value: '0个',
       },
+      // {
+      //   label: '待抽检数',
+      //   value: '0',
+      // },
+    ],
+  },
+  {
+    id: 5,
+    name: 'quality',
+    title: '项目信息',
+    description: '2021-10-15 08:10:00 最后更新',
+    data: [
+      {
+        label: '数据清单',
+        value: '1个',
+      },
+      {
+        label: '离线文件',
+        value: '0个',
+      },
+      // {
+      //   label: '待抽检数',
+      //   value: '0',
+      // },
+    ],
+  },
+  {
+    id: 6,
+    name: 'quality',
+    title: '专利信息',
+    description: '2021-10-15 08:10:00 最后更新',
+    data: [
+      {
+        label: '数据清单',
+        value: '1个',
+      },
+      {
+        label: '离线文件',
+        value: '0个',
+      },
+      // {
+      //   label: '待抽检数',
+      //   value: '0',
+      // },
+    ],
+  },
+  {
+    id: 7,
+    name: 'quality',
+    title: '采购信息',
+    description: '2021-10-15 08:10:00 最后更新',
+    data: [
+      {
+        label: '数据清单',
+        value: '1个',
+      },
+      {
+        label: '离线文件',
+        value: '0个',
+      },
+      // {
+      //   label: '待抽检数',
+      //   value: '0',
+      // },
+    ],
+  },
+  {
+    id: 8,
+    name: 'quality',
+    title: '住宿信息',
+    description: '2021-10-15 08:10:00 最后更新',
+    data: [
+      {
+        label: '数据清单',
+        value: '1个',
+      },
+      {
+        label: '离线文件',
+        value: '0个',
+      },
+      // {
+      //   label: '待抽检数',
+      //   value: '0',
+      // },
     ],
   },
 ];
@@ -68,9 +168,9 @@ const theServiceList: ServiceRecord[] = [
   {
     id: 1,
     icon: 'code',
-    title: '漏斗分析',
+    title: '打卡数据',
     description:
-      '用户行为分析之漏斗分析模型是企业实现精细化运营、进行用户行为分析的重要数据分析模型。',
+      '用户打卡行为分析是平台实现精细化运营、进行用户行为分析的重要数据分析模型。',
     enable: true,
     actionType: 'button',
   },
