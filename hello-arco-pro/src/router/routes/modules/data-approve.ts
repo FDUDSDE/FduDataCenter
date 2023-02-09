@@ -42,10 +42,21 @@ const DATAAPPROVE: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    // {
+    //   path: 'search-table2', // The midline path complies with SEO specifications
+    //   name: 'st3',
+    //   component: () => import('@/views/data-approve/search-table2/index.vue'),
+    //   meta: {
+    //     locale: '可视化分析',
+    //     requiresAuth: true,
+    //     roles: ['*'],
+    //   },
+    // },
+
     {
-      path: 'search-table2', // The midline path complies with SEO specifications
-      name: 'st3',
-      component: () => import('@/views/data-approve/search-table2/index.vue'),
+      path: 'data-analysis', // The midline path complies with SEO specifications
+      name: 'analysis',
+      component: () => import('@/views/data-approve/data-analysis/index.vue'),
       meta: {
         locale: '可视化分析',
         requiresAuth: true,

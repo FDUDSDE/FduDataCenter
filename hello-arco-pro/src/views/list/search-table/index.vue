@@ -7,19 +7,18 @@
       justifyContent: 'space-between',
     }" :title="$t('menu.list.searchTable')">
       <div :style="{
-        display: 'flex', marginLeft: '240px'
+        display: 'flex', marginLeft: '340px'
       }">
-
-        <span :style="{ display: 'flex', alignItems: 'center', color: '#1D2129', marginRight: '10px' ,fontSize:'24px',fontWeight:'500'}">
+        <span
+          :style="{ display: 'flex', alignItems: 'center', color: '#1D2129', marginRight: '10px', fontSize: '24px', fontWeight: '500' }">
           <a-typography-text>数据智搜</a-typography-text>
         </span>
-        <a-input-search @search="onSearch" :style="{ width: '620px', height: '50px', }" placeholder="Please enter something" />
-
+        <a-select :options="['全部', '字段', '部门', '类型']" :style="{ width: '80px' }" placeholder="全部" />
+        <a-input-search @search="onSearch" :style="{ width: '620px', height: '50px', }" placeholder="职工号、姓名、籍贯"/>
       </div>
-
     </a-card>
+
     <a-card class="general-card" :title="$t('数据预览')">
-      
       <a-row style="margin-bottom: 16px">
         以下数据表包含部门“人事处”的相关数据
       </a-row>
@@ -50,6 +49,7 @@ import Sortable from 'sortablejs';
 import axios from 'axios';
 import { isTemplateElement } from '@babel/types';
 import qs from 'query-string';
+import { color } from 'echarts';
 
 type SizeProps = 'mini' | 'small' | 'medium' | 'large';
 type Column = TableColumnData & { checked?: true };
@@ -81,7 +81,7 @@ const size = ref<SizeProps>('medium');
 
 const basePagination: Pagination = {
   current: 1,
-  pageSize: 20,
+  pageSize: 10,
 };
 const pagination = reactive({
   ...basePagination,
@@ -107,12 +107,12 @@ const densityList = computed(() => [
 
 const tabChange = async (key: any) => {
   console.log(key)
-  await fetchData({ current: 1, pageSize: 20, key })
+  await fetchData({ current: 1, pageSize: 10, key })
 }
 
 const onSearch = async (value: any) => {
   console.log(tabKey.value, value)
-  await fetchData({ current: 1, pageSize: 20, key: tabKey.value, value })
+  await fetchData({ current: 1, pageSize: 10, key: tabKey.value, value })
 }
 
 const columns = ref<TableColumnData[]>([])
@@ -159,7 +159,7 @@ const statusOptions = computed<SelectOptionData[]>(() => [
   },
 ]);
 const fetchData = async (
-  params: any = { current: 1, pageSize: 20, key: 1, value: '' }
+  params: any = { current: 1, pageSize: 10, key: 1, value: '' }
 ) => {
   setLoading(true);
   try {
@@ -279,6 +279,7 @@ export default {
   name: 'SearchTable',
 };
 </script>
+
 
 <style scoped lang="less">
 .container {

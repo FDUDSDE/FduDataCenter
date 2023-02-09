@@ -1,45 +1,41 @@
 <template>
   <div class="container">
     <Breadcrumb :items="['数据查询', '便捷查询']" />
+
     <a-card class="general-card" :style="{ marginBottom: '20px', height: '200px' }" :title="$t('一、数据源选择')">
       <a-row style="margin-top: -15px">
         <span style="margin-left: 30px">
           从以下您已获得的数据集中选择查询的数据源
         </span>
       </a-row>
-
-        <div :style="{ marginTop: '16px',marginLeft: '23px'}">
-          <a-checkbox-group :default-value="[1]">
-            <template v-for="item in [['教师基本信息','T_GXJG_JZGJBXX'] ,['论文发表信息','TGXJG_JSLWFBXX'],['基金项目信息','TGXXMJJXMXX'] ]" :key="item">
-              <a-checkbox :value="item">
-                <template #checkbox="{ checked }">
-                  <a-space align="start" class="custom-checkbox-card"
-                    :class="{ 'custom-checkbox-card-checked': checked }">
-                    <div className="custom-checkbox-card-mask">
-                      <div className="custom-checkbox-card-mask-dot" />
+      <div :style="{ marginTop: '16px', marginLeft: '23px' }">
+        <a-checkbox-group :default-value="[1]">
+          <template
+            v-for="item in [['教师基本信息', 'T_GXJG_JZGJBXX'], ['论文发表信息', 'TGXJG_JSLWFBXX'], ['基金项目信息', 'TGXXMJJXMXX']]"
+            :key="item">
+            <a-checkbox :value="item">
+              <template #checkbox="{ checked }">
+                <a-space align="start" class="custom-checkbox-card"
+                  :class="{ 'custom-checkbox-card-checked': checked }">
+                  <div className="custom-checkbox-card-mask">
+                    <div className="custom-checkbox-card-mask-dot" />
+                  </div>
+                  <div>
+                    <div className="custom-checkbox-card-title">
+                      {{ item[0]}}
                     </div>
-                    <div>
-                      <div className="custom-checkbox-card-title">
-                        {{ item[0]}}
-                      </div>
-                      <a-typography-text type="secondary">
-                        {{ item[1]}}
-                      </a-typography-text>
-                    </div>
-                  </a-space>
-                </template>
-              </a-checkbox>
-            </template>
-          </a-checkbox-group>
-        </div>
-      
-
-
-
-
-
-
+                    <a-typography-text type="secondary">
+                      {{ item[1]}}
+                    </a-typography-text>
+                  </div>
+                </a-space>
+              </template>
+            </a-checkbox>
+          </template>
+        </a-checkbox-group>
+      </div>
     </a-card>
+
 
     <a-card class="general-card" :style="{ marginBottom: '20px', height: '150px' }" :title="$t('二、全局搜索')">
       <a-row style="margin-top: -15px">
@@ -47,21 +43,35 @@
           从数据源中全局搜素，留空默认获取全部数据
         </span>
       </a-row>
+
       <a-row style="margin-top: 12px">
         <span style="margin-left: 30px">
-          <a-input-search @search="onSearch" :style="{ width: '480px', height: '35px', }" placeholder="张三" />
+          <a-input-search @search="onSearch" :style="{ width: '480px', height: '35px', }" placeholder="张三"
+            search-button>
+            <template #button-icon>
+              <icon-search />
+            </template>
+            <template #button-default>
+              获取数据
+            </template>
+          </a-input-search>
         </span>
-        <a-button type="primary" style="margin-left: 20px">获取数据</a-button>
       </a-row>
-
     </a-card>
 
-    <a-card class="general-card" :title="$t('三、数据浏览与筛选')">
+
+
+    <a-card class="general-card" :style="{ height: '1560px' }" :title="$t('三、数据浏览与筛选')">
       <a-row style="margin-top: -15px">
         <span style="margin-left: 30px">
           可以任意规则进行数据筛选，可对结果数据进行下载或进一步分析
         </span>
+      </a-row>
 
+      <a-row style="margin-top: 5px">
+        <span style="margin-left: 25px">
+          <a-image width="500" height="170" src="../src/assets/images/数据筛选.png" />
+        </span>
       </a-row>
 
       <a-tabs v-model:active-key="tabKey" @tab-click="tabChange">
@@ -72,10 +82,13 @@
           </a-table>
         </a-tab-pane>
       </a-tabs>
-      <a-row style="margin-top: 15px">
 
-        <span style="margin-left: 1030px">
-          <a-button type="outline">下一步分析</a-button>
+      <a-row style="margin-top: 30px">
+        <span style="margin-left: 1470px">
+          <router-link style="text-decoration: none" to='/data-approve/data-analysis'>
+            <a-button type="outline">下一步分析</a-button>
+          </router-link>
+
         </span>
       </a-row>
     </a-card>
@@ -126,7 +139,7 @@ const size = ref<SizeProps>('medium');
 
 const basePagination: Pagination = {
   current: 1,
-  pageSize: 20,
+  pageSize: 15,
 };
 const pagination = reactive({
   ...basePagination,
@@ -152,12 +165,12 @@ const densityList = computed(() => [
 
 const tabChange = async (key: any) => {
   console.log(key)
-  await fetchData({ current: 1, pageSize: 20, key })
+  await fetchData({ current: 1, pageSize: 15, key })
 }
 
 const onSearch = async (value: any) => {
   console.log(tabKey.value, value)
-  await fetchData({ current: 1, pageSize: 20, key: tabKey.value, value })
+  await fetchData({ current: 1, pageSize: 15, key: tabKey.value, value })
 }
 
 const columns = ref<TableColumnData[]>([])
@@ -204,7 +217,7 @@ const statusOptions = computed<SelectOptionData[]>(() => [
   },
 ]);
 const fetchData = async (
-  params: any = { current: 1, pageSize: 20, key: 1, value: '' }
+  params: any = { current: 1, pageSize: 15, key: 1, value: '' }
 ) => {
   setLoading(true);
   try {

@@ -27,7 +27,7 @@ const USEROWN: AppRouteRecordRaw = {
       name: 'SearchTable',
       component: () => import('@/views/user-own/search-table/index.vue'),
       meta: {
-        locale: 'menu.user.own.searchTable',
+        locale: '我的申请',
         requiresAuth: true,
         roles: ['*'],
       },
