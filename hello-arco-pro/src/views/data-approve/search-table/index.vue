@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container"> 
     <Breadcrumb :items="['数据查询', '便捷查询']" />
 
     <a-card class="general-card" :style="{ marginBottom: '20px', height: '200px' }" :title="$t('一、数据源选择')">
@@ -8,24 +8,25 @@
           从以下您已获得的数据集中选择查询的数据源
         </span>
       </a-row>
-      <div :style="{ marginTop: '16px', marginLeft: '23px' }">
-        <a-checkbox-group :default-value="[1]">
+     <div :style="{ marginTop: '16px', marginLeft: '23px' }">
+        <a-checkbox-group  >
           <template
-            v-for="item in [['教师基本信息', 'T_GXJG_JZGJBXX'], ['论文发表信息', 'TGXJG_JSLWFBXX'], ['基金项目信息', 'TGXXMJJXMXX']]"
+            v-for="item in ['教师基本信息T_GXJG_JZGJBXX', '论文发表信息TGXJG_JSLWFBXX', '基金项目信息TGXXMJJXMXX']"
             :key="item">
             <a-checkbox :value="item">
               <template #checkbox="{ checked }">
                 <a-space align="start" class="custom-checkbox-card"
                   :class="{ 'custom-checkbox-card-checked': checked }">
                   <div className="custom-checkbox-card-mask">
-                    <div className="custom-checkbox-card-mask-dot" />
+                    <div className="custom-checkbox-card-mask-dot" >
+                    </div>
                   </div>
                   <div>
                     <div className="custom-checkbox-card-title">
-                      {{ item[0]}}
+                      {{ item.substring(0,6)}}
                     </div>
                     <a-typography-text type="secondary">
-                      {{ item[1]}}
+                      {{ item.substring(6)}}
                     </a-typography-text>
                   </div>
                 </a-space>
@@ -61,7 +62,7 @@
 
 
 
-    <a-card class="general-card" :style="{ height: '1200px' }" :title="$t('三、数据浏览与筛选')">
+    <a-card class="general-card"  :title="$t('三、数据浏览与筛选')">
       <a-row style="margin-top: -15px">
         <span style="margin-left: 30px">
           可以任意规则进行数据筛选，可对结果数据进行下载或进一步分析
@@ -114,10 +115,11 @@ import axios from 'axios';
 import { isTemplateElement } from '@babel/types';
 import qs from 'query-string';
 
+
 type SizeProps = 'mini' | 'small' | 'medium' | 'large';
 type Column = TableColumnData & { checked?: true };
 const tabKey = ref('1')
-const titles = reactive({
+const titles:any = reactive({
   1: '教师基本信息',
   2: '发表论文情况',
   3: '基金项目信息'
@@ -232,14 +234,14 @@ const fetchData = async (
         return qs.stringify(obj);
       },
     });
-    console.log(list)
-    renderData.value = list;
+    // console.log(list.slice(1))
+    // renderData.value = list;
 
     pagination.current = params.current;
     pagination.total = total;
 
     columns.value = list[0].map((item: any) => ({ title: item, dataIndex: item, width: 140, }))
-    renderData.value = list.slice(1, list.length - 1).map((row: { [x: string]: any; }, index: any) => {
+    renderData.value = list.slice(1).map((row: { [x: string]: any; }, index: any) => {
       const obj: any = {}
       for (let i = 0; i < list[0].length; i += 1) {
         const key = list[0][i]
@@ -262,10 +264,10 @@ const search = () => {
   } as unknown as PolicyParams);
 };
 const onPageChange = (current: number) => {
-  fetchData({ ...basePagination, current });
+  fetchData({ ...basePagination, current, key: tabKey.value });
 };
 
-fetchData();
+fetchData(); 
 const reset = () => {
   formModel.value = generateFormModel();
 };

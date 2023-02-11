@@ -67,7 +67,7 @@ import { color } from 'echarts';
 type SizeProps = 'mini' | 'small' | 'medium' | 'large';
 type Column = TableColumnData & { checked?: true };
 const tabKey = ref('1')
-const titles = reactive({
+const titles:any = reactive({
   1: '教师基本信息',
   2: '发表论文情况',
   3: '基金项目信息'

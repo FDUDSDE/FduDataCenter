@@ -26,12 +26,12 @@
                 </a-form-item>
               </a-col>
 
-              <a-col :span="8">
+              <!-- <a-col :span="8">
                 <a-form-item field="filterType" :label="$t('searchTable.form.filterType')">
                   <a-select v-model="formModel.filterType" :options="filterTypeOptions"
                     :placeholder="$t('searchTable.form.selectDefault')" />
                 </a-form-item>
-              </a-col>
+              </a-col> -->
 
               <!-- <a-col :span="8">
                 <a-form-item
