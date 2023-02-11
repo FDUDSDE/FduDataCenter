@@ -41,7 +41,7 @@ export default {
   'menu.server.workplace': '工作台-服务端',
   // ß'menu.server.monitor': '实时监控-服务端',
   'menu.list': '数据检索',
-  'menu.result': '结果页',
+  'menu.result': '数据目录',
   'menu.exception': '异常页',
   'menu.form': '表单页',
   'menu.profile': '详情页',

@@ -84,7 +84,9 @@
       </a-tabs>
 
       <a-row style="margin-top: 30px">
-        <span style="margin-left: 1470px">
+        
+        <span style="margin-left: 1070px">
+          
           <router-link style="text-decoration: none" to='/data-approve/data-analysis'>
             <a-button type="outline">下一步分析</a-button>
           </router-link>

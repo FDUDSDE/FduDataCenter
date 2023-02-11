@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Breadcrumb :items="['menu.result', 'menu.result.success']" />
+    <Breadcrumb :items="['menu.result', '成功页']" />
     <div class="wrapper">
       <a-result
         class="result"
@@ -10,10 +10,16 @@
       >
         <template #extra>
           <a-space class="operation-wrap" :size="16">
-            <a-button key="again" type="secondary">
+
+          <router-link style="text-decoration: none" to='/data-approve/search-table'>
+             <a-button key="again" type="primary">
               {{ $t('success.result.printResult') }}
             </a-button>
-            <a-button key="back" type="primary">
+          </router-link>
+           
+
+
+            <a-button key="back" type="secondary">
               {{ $t('success.result.projectList') }}
             </a-button>
           </a-space>
@@ -27,7 +33,7 @@
         <a-steps type="dot" :current="2">
           <a-step
             :title="$t('success.submitApplication')"
-            description="2020/10/10 14:00:39"
+            description="2023/2/10 14:00:39"
           />
           <a-step
             :title="$t('success.leaderReview')"

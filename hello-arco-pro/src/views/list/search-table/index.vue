@@ -7,7 +7,7 @@
       justifyContent: 'space-between',
     }" :title="$t('menu.list.searchTable')">
       <div :style="{
-        display: 'flex', marginLeft: '340px'
+        display: 'flex', marginLeft: '220px'
       }">
         <span
           :style="{ display: 'flex', alignItems: 'center', color: '#1D2129', marginRight: '10px', fontSize: '24px', fontWeight: '500' }">
