@@ -1,0 +1,15 @@
+export default {
+  'menu.result.success': '数据清单',
+  'success.result.title': '提交成功',
+  'success.result.subTitle': '申请提交成功！',
+  'success.result.printResult': '数据查询',
+  'success.result.projectList': '返回申请列表',
+  'success.result.progress': '当前进度',
+  'success.submitApplication': '提交申请',
+  'success.leaderReview': '部门审核人审批',
+  'success.purchaseCertificate': '后台管理员审批',
+  'success.safetyTest': '信息化办公室审批',
+  'success.launched': '获取数据',
+  'success.waiting': '未开始',
+  'success.processing': '进行中',
+};

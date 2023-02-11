@@ -61,12 +61,15 @@
 
 
 
-    <a-card class="general-card" :style="{ height: '1560px' }" :title="$t('三、数据浏览与筛选')">
+    <a-card class="general-card" :style="{ height: '1200px' }" :title="$t('三、数据浏览与筛选')">
       <a-row style="margin-top: -15px">
         <span style="margin-left: 30px">
           可以任意规则进行数据筛选，可对结果数据进行下载或进一步分析
         </span>
       </a-row>
+
+
+      
 
       <a-row style="margin-top: 5px">
         <span style="margin-left: 25px">
@@ -83,12 +86,12 @@
         </a-tab-pane>
       </a-tabs>
 
-      <a-row style="margin-top: 30px">
+      <a-row style="margin-top: 30px ">
         
-        <span style="margin-left: 1070px">
+        <span style="left: 770px">
           
           <router-link style="text-decoration: none" to='/data-approve/data-analysis'>
-            <a-button type="outline">下一步分析</a-button>
+            <a-button type="outline"  style="left: 1470px ">下一步分析</a-button>
           </router-link>
 
         </span>
@@ -137,7 +140,7 @@ const cloneColumns = ref<Column[]>([]);
 const showColumns = ref<Column[]>([]);
 
 
-const size = ref<SizeProps>('medium');
+const size = ref<SizeProps>('mini');
 
 const basePagination: Pagination = {
   current: 1,

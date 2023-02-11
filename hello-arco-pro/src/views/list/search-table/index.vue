@@ -7,30 +7,43 @@
       justifyContent: 'space-between',
     }" :title="$t('menu.list.searchTable')">
       <div :style="{
-        display: 'flex', marginLeft: '220px'
+        display: 'flex', marginLeft: '360px'
       }">
         <span
           :style="{ display: 'flex', alignItems: 'center', color: '#1D2129', marginRight: '10px', fontSize: '24px', fontWeight: '500' }">
           <a-typography-text>数据智搜</a-typography-text>
         </span>
         <a-select :options="['全部', '字段', '部门', '类型']" :style="{ width: '80px' }" placeholder="全部" />
-        <a-input-search @search="onSearch" :style="{ width: '620px', height: '50px', }" placeholder="职工号、姓名、籍贯"/>
+        <a-input-search @search="onSearch" :style="{ width: '620px', height: '50px', }" placeholder="职工号、姓名、籍贯" />
       </div>
     </a-card>
 
-    <a-card class="general-card" :title="$t('数据预览')">
+    <a-card class="general-card" :title="$t('数据预览')" :style="{ height: '850px' }">
       <a-row style="margin-bottom: 16px">
         以下数据表包含部门“人事处”的相关数据
       </a-row>
 
-      <a-tabs v-model:active-key="tabKey" @tab-click="tabChange">
-        <a-tab-pane v-for="key in ['1', '2', '3']" :key="key" :title="titles[key]">
-          <a-table row-key="id" :loading="loading" :pagination="pagination"
+      <a-tabs v-model:active-key="tabKey" @tab-click="tabChange" >
+        <a-tab-pane v-for="key in ['1', '2', '3']" :key="key" :title="titles[key]" >
+          <a-table row-key="id" :loading="loading"
             :columns="(cloneColumns as TableColumnData[])" :data="renderData" :bordered="false" :size="size"
-            @page-change="onPageChange">
+          >
           </a-table>
         </a-tab-pane>
       </a-tabs>
+
+      <a-row style="margin-top: 30px">
+
+        <span style="margin-left: 1320px">
+
+          <router-link style="text-decoration: none" to='/list/success'>
+            <a-button type="primary">提交申请</a-button>
+          </router-link>
+
+          <a-button type="outline" :style="{ marginLeft: '40px',}" >加入申请列表</a-button>
+
+        </span>
+      </a-row>
 
     </a-card>
   </div>
@@ -77,7 +90,7 @@ const cloneColumns = ref<Column[]>([]);
 const showColumns = ref<Column[]>([]);
 
 
-const size = ref<SizeProps>('medium');
+const size = ref<SizeProps>('mini');
 
 const basePagination: Pagination = {
   current: 1,
@@ -176,7 +189,7 @@ const fetchData = async (
     pagination.total = total;
 
     columns.value = list[0].map((item: any) => ({ title: item, dataIndex: item, width: 140, }))
-    renderData.value = list.slice(1, list.length - 1).map((row: { [x: string]: any; }, index: any) => {
+    renderData.value = list.slice(1, 11).map((row: { [x: string]: any; }, index: any) => {
       const obj: any = {}
       for (let i = 0; i < list[0].length; i += 1) {
         const key = list[0][i]

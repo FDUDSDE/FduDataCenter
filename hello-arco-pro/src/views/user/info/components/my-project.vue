@@ -1,5 +1,5 @@
 <template>
-  <a-card class="general-card" :title="$t('userInfo.title.myProject')">
+  <a-card class="general-card" :title="$t('用户角色')">
     <template #extra>
       <a-link>{{ $t('userInfo.showMore') }}</a-link>
     </template>

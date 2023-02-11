@@ -22,16 +22,16 @@ const USEROWN: AppRouteRecordRaw = {
     //     roles: ['*'],
     //   },
     // },
-    {
-      path: 'search-table', // The midline path complies with SEO specifications
-      name: 'SearchTable',
-      component: () => import('@/views/user-own/search-table/index.vue'),
-      meta: {
-        locale: '我的申请',
-        requiresAuth: true,
-        roles: ['*'],
-      },
-    },
+    // {
+    //   path: 'search-table', // The midline path complies with SEO specifications
+    //   name: 'SearchTable',
+    //   component: () => import('@/views/user-own/search-table/index.vue'),
+    //   meta: {
+    //     locale: '我的申请',
+    //     requiresAuth: true,
+    //     roles: ['*'],
+    //   },
+    // },
     {
       path: 'setting',
       name: 'Setting',

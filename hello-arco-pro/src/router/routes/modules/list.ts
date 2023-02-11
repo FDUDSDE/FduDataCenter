@@ -32,6 +32,17 @@ const LIST: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
+    {
+      path: 'success', // The midline path complies with SEO specifications
+      name: 'succeed',
+      component: () => import('@/views/list/success/index.vue'),
+      meta: {
+        locale: '成功页',
+        requiresAuth: true,
+        roles: ['*'],
+        hideInMenu: true,
+      },
+    },
     // {
     //   path: 'card',
     //   name: 'Card',
