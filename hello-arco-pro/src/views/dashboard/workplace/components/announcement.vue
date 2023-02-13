@@ -22,9 +22,9 @@
 <script lang="ts" setup>
   const list = [
     {
-      type: 'orangered',
-      label: '系统',
-      content: '学工系统HSM ETL接口异常...',
+      type: 'blue',
+      label: '通知',
+      content: '用户xx数据申请审核通过，详...',
     },
     {
       type: 'cyan',

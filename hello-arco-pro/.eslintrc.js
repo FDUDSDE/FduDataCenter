@@ -69,12 +69,12 @@ module.exports = {
     "prettier/prettier": "off",
     '@typescript-eslint/no-var-requires': 0
   },
-  overrides: [
-    {
-      rules: {
-          // 禁止不必要的转义字符
-          'no-useless-escape': 0,
-      },
-    },
-  ]
+  // overrides: [
+  //   {
+  //     rules: {
+  //         // 禁止不必要的转义字符
+  //         'no-useless-escape': 0,
+  //     },
+  //   },
+  // ]
 };

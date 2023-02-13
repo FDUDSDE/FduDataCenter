@@ -12,7 +12,7 @@
         <a-link>{{ $t('workplace.viewMore') }}</a-link>
       </template>
       <a-space direction="vertical" :size="10" fill>
-        <a-radio-group
+        <!-- <a-radio-group
           v-model:model-value="type"
           type="button"
           @change="typeChange as any"
@@ -26,7 +26,7 @@
           <a-radio value="video">
             {{ $t('workplace.popularContent.etl') }}
           </a-radio>
-        </a-radio-group>
+        </a-radio-group> -->
         <a-table
           :data="renderList"
           :pagination="false"
@@ -46,7 +46,7 @@
                 </a-typography-paragraph>
               </template>
             </a-table-column>
-            <a-table-column title="调用量" data-index="clickNumber">
+            <a-table-column title="访问量" data-index="clickNumber">
             </a-table-column>
             <a-table-column
               title="日涨量"

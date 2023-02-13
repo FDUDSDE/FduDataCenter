@@ -10,21 +10,21 @@
         display: 'flex', marginLeft: '360px'
       }">
         <span
-          :style="{ display: 'flex', alignItems: 'center', color: '#1D2129', marginRight: '10px', fontSize: '24px', fontWeight: '500' }">
+          :style="{ display: 'flex', alignItems: 'center', color: '#1D2129', marginRight: '20px', fontSize: '24px'}">
           <a-typography-text>数据智搜</a-typography-text>
         </span>
-        <a-select :options="['全部', '字段', '部门', '类型']" :style="{ width: '80px' }" placeholder="全部" />
-        <a-input-search @search="onSearch" :style="{ width: '620px', height: '50px', }" placeholder="职工号、姓名、籍贯" />
+        <a-select v-model="typeOption" :options="['字段', '部门']" :style="{ width: '80px' }" placeholder="字段" />
+        <a-input-search v-model="keywords" @search="onSearch" :style="{ width: '620px', height: '50px', }" placeholder="工号、姓名、国籍..." />
       </div>
     </a-card>
 
     <a-card class="general-card" :title="$t('数据预览')" :style="{ height: '850px' }">
       <a-row style="margin-bottom: 16px">
-        以下数据表包含部门“人事处”的相关数据
+        {{tips}}
       </a-row>
 
-      <a-tabs v-model:active-key="tabKey" @tab-click="tabChange" >
-        <a-tab-pane v-for="key in ['1', '2', '3']" :key="key" :title="titles[key]" >
+      <a-tabs v-model:active-key="tabKey" @tab-click="tabChange" :key="tabsKey">
+        <a-tab-pane v-for="key in titleKeys" :key="key" :title="titles[key]" >
           <a-table row-key="id" :loading="loading"
             :columns="(cloneColumns as TableColumnData[])" :data="renderData" :bordered="false" :size="size"
           >
@@ -63,15 +63,31 @@ import axios from 'axios';
 import { isTemplateElement } from '@babel/types';
 import qs from 'query-string';
 import { color } from 'echarts';
+import { isEmpty } from 'lodash';
 
 type SizeProps = 'mini' | 'small' | 'medium' | 'large';
 type Column = TableColumnData & { checked?: true };
 const tabKey = ref('1')
-const titles:any = reactive({
+const tabsKey = ref(0)
+const tips = ref('以下展示所有可申请的数据表示例：')
+const keywords = ref()
+const typeOption = ref('字段')
+let titles:any = reactive({
   1: '教师基本信息',
   2: '发表论文情况',
   3: '基金项目信息'
 })
+let titleKeys:any = reactive(['1', '2', '3'])
+const allTitles:any = {
+  1: '教师基本信息',
+  2: '发表论文情况',
+  3: '基金项目信息'
+}
+const cols = [
+  ['工号', '姓名', '性别', '年龄', '国籍', '民族', '出生地', '单位名称', '专业技术职务名称', '职称级别'],
+  ['论文标题', '期刊名称', '工号', '出版年份'],
+  ['项目编号', '项目性质', '项目名称', '工号', '姓名', '项目分类', '履行合同金额', '立项时间']
+]
 const generateFormModel = () => {
   return {
     number: '',
@@ -119,13 +135,54 @@ const densityList = computed(() => [
 ]);
 
 const tabChange = async (key: any) => {
-  console.log(key)
+  console.log('tabChange', key)
   await fetchData({ current: 1, pageSize: 10, key })
 }
 
 const onSearch = async (value: any) => {
   console.log(tabKey.value, value)
-  await fetchData({ current: 1, pageSize: 10, key: tabKey.value, value })
+  console.log(typeOption, keywords)
+  if (isEmpty(value)) {
+    tips.value = '以下展示所有可申请的数据表示例：'
+    titleKeys = ['1', '2', '3']
+    titles = allTitles
+    tabKey.value = '1'
+    await fetchData({ current: 1, pageSize: 10, key: tabKey.value})
+  } else {
+    tips.value = `以下为包含${typeOption.value}为“${keywords.value}”的数据表示例：`
+    if (typeOption.value === '字段') {
+      const resList: number[] = []
+      cols.forEach((element, index) => {
+        element.forEach(e => {
+          if (e === keywords.value) {
+            resList.push(index+1)
+          }
+        })
+      });
+      console.log(resList)
+      const tmpTitles: any = {}
+      resList.forEach(e => {
+        tmpTitles[e] = allTitles[e]
+      })
+      console.log(tmpTitles)
+      titles = tmpTitles
+      console.log(titles)
+      titleKeys = Object.keys(titles)
+      console.log(titleKeys)
+      if (isEmpty(resList)) {
+        renderData.value = []
+      } else {
+        await fetchData({ current: 1, pageSize: 10, key: resList[0]})
+        tabKey.value = '1'
+      }
+    } else {
+      titleKeys = ['1', '2', '3']
+      titles = allTitles
+      tabKey.value = '1'
+      await fetchData({ current: 1, pageSize: 10, key: tabKey.value})
+    }
+  }
+  tabsKey.value += 1
 }
 
 const columns = ref<TableColumnData[]>([])
@@ -189,7 +246,18 @@ const fetchData = async (
     pagination.total = total;
 
     columns.value = list[0].map((item: any) => ({ title: item, dataIndex: item, width: 140, }))
-    renderData.value = list.slice(1, 11).map((row: { [x: string]: any; }, index: any) => {
+
+    let start = 30
+    let end = 40
+    if (typeOption.value==='部门' && keywords.value==='计算机科学技术学院') {
+      start = 1
+      end = 11
+    }
+    if (typeOption.value==='部门' && keywords.value==='微电子学院') {
+      start = 11
+      end = 21
+    }
+    renderData.value = list.slice(start, end).map((row: { [x: string]: any; }, index: any) => {
       const obj: any = {}
       for (let i = 0; i < list[0].length; i += 1) {
         const key = list[0][i]
@@ -197,7 +265,7 @@ const fetchData = async (
       }
       return obj
     })
-    console.log(renderData)
+    // console.log(renderData)
   } catch (err) {
     // you can report use errorHandler or other
   } finally {
@@ -212,6 +280,7 @@ const search = () => {
   } as unknown as PolicyParams);
 };
 const onPageChange = (current: number) => {
+  console.log('page change')
   fetchData({ ...basePagination, current });
 };
 
@@ -291,6 +360,10 @@ watch(
 export default {
   name: 'SearchTable',
 };
+
+function getCurrentInstance(): { ctx: any; proxy: any; } {
+throw new Error('Function not implemented.');
+}
 </script>
 
 

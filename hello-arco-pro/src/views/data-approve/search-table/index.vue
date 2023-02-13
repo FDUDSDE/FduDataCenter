@@ -8,10 +8,14 @@
           从以下您已获得的数据集中选择查询的数据源
         </span>
       </a-row>
+      
      <div :style="{ marginTop: '16px', marginLeft: '23px' }">
-        <a-checkbox-group  >
+      <a-space direction="vertical">
+        <a-checkbox :model-value="checkedAll" :indeterminate="indeterminate" @change="handleChangeAll">全选
+    </a-checkbox>
+        <a-checkbox-group v-model="boxData" >
           <template
-            v-for="item in ['教师基本信息T_GXJG_JZGJBXX', '论文发表信息TGXJG_JSLWFBXX', '基金项目信息TGXXMJJXMXX']"
+            v-for="item in ['教师基本信息总数据量 880 条', '论文发表信息总数据量 8906 条', '基金项目信息总数据量 3493 条']"
             :key="item">
             <a-checkbox :value="item">
               <template #checkbox="{ checked }">
@@ -34,6 +38,7 @@
             </a-checkbox>
           </template>
         </a-checkbox-group>
+      </a-space>
       </div>
     </a-card>
 
@@ -119,6 +124,20 @@ import qs from 'query-string';
 type SizeProps = 'mini' | 'small' | 'medium' | 'large';
 type Column = TableColumnData & { checked?: true };
 const tabKey = ref('1')
+const indeterminate = ref(false)
+const checkedAll = ref(false)
+const boxData = ref([])
+
+const handleChangeAll = (value) => {
+  indeterminate.value = false;
+  if (value) {
+    checkedAll.value = true;
+    boxData.value = ['教师基本信息总数据量 880 条', '论文发表信息总数据量 8906 条', '基金项目信息总数据量 3493 条']
+  } else {
+    checkedAll.value = false;
+    boxData.value = []
+  }
+}
 const titles:any = reactive({
   1: '教师基本信息',
   2: '发表论文情况',

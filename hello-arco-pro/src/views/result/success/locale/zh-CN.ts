@@ -1,8 +1,8 @@
 export default {
   'menu.result.success': '数据清单',
   'success.result.title': '提交成功',
-  'success.result.subTitle': '申请提交成功！',
-  'success.result.printResult': '数据查询',
+  'success.result.subTitle': '申请提交成功！等待审批中...',
+  'success.result.printResult': '返回数据检索',
   'success.result.projectList': '返回申请列表',
   'success.result.progress': '当前进度',
   'success.submitApplication': '提交申请',

@@ -22,16 +22,16 @@ const LIST: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
-    {
-      path: 'search-table1', // The midline path complies with SEO specifications
-      name: 'Search1',
-      component: () => import('@/views/list/search-table1/index.vue'),
-      meta: {
-        locale: '高级检索',
-        requiresAuth: true,
-        roles: ['*'],
-      },
-    },
+    // {
+    //   path: 'search-table1', // The midline path complies with SEO specifications
+    //   name: 'Search1',
+    //   component: () => import('@/views/list/search-table1/index.vue'),
+    //   meta: {
+    //     locale: '高级检索',
+    //     requiresAuth: true,
+    //     roles: ['*'],
+    //   },
+    // },
     {
       path: 'success', // The midline path complies with SEO specifications
       name: 'succeed',
