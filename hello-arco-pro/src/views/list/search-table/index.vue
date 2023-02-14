@@ -18,7 +18,7 @@
       </div>
     </a-card>
 
-    <a-card class="general-card" :title="$t('数据预览')" :style="{ height: '850px' }">
+    <a-card class="general-card" :title="$t('数据预览')" :style="{ height: '1000px' }">
       <a-row style="margin-bottom: 16px">
         {{tips}}
       </a-row>
@@ -32,9 +32,14 @@
         </a-tab-pane>
       </a-tabs>
 
+      请在此选择需要申请的字段：
+      <a-row style="margin-top: 30px">
+        <a-transfer :data="transData" :default-value="transValue" :title="['数据源字段', '申请字段']" :key="transKey"/>
+      </a-row>
+      
       <a-row style="margin-top: 30px">
 
-        <span style="margin-left: 1320px">
+        <span style="margin-left: 1000px">
 
           <router-link style="text-decoration: none" to='/list/success'>
             <a-button type="primary">提交申请</a-button>
@@ -69,6 +74,7 @@ type SizeProps = 'mini' | 'small' | 'medium' | 'large';
 type Column = TableColumnData & { checked?: true };
 const tabKey = ref('1')
 const tabsKey = ref(0)
+const transKey = ref(0)
 const tips = ref('以下展示所有可申请的数据表示例：')
 const keywords = ref()
 const typeOption = ref('字段')
@@ -105,6 +111,11 @@ const formModel = ref(generateFormModel());
 const cloneColumns = ref<Column[]>([]);
 const showColumns = ref<Column[]>([]);
 
+let transData = cols[0].map((e, index) => ({
+      value: `option${index + 1}`,
+      label: e
+    }));
+let transValue = ['option1', 'option2', 'option3'];
 
 const size = ref<SizeProps>('mini');
 
@@ -137,6 +148,13 @@ const densityList = computed(() => [
 const tabChange = async (key: any) => {
   console.log('tabChange', key)
   await fetchData({ current: 1, pageSize: 10, key })
+  transData = cols[key-1].map((e, index) => ({
+      value: `option${index + 1}`,
+      label: e
+    }));
+  console.log(transData)
+  transValue = ['option1', 'option2', 'option3']
+  transKey.value += 1
 }
 
 const onSearch = async (value: any) => {
