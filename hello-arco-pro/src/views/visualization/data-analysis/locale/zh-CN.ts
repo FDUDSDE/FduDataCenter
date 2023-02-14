@@ -1,10 +1,10 @@
 export default {
   'menu.visualization.dataAnalysis': '分析页',
-  'dataAnalysis.title.publicOpinion': '统计分析',
-  'dataAnalysis.card.title.allVisitors': '访问总人次',
+  'dataAnalysis.title.publicOpinion': '数据卡片',
+  'dataAnalysis.card.title.allVisitors': '项目总量',
   'dataAnalysis.card.title.contentPublished': '论文发布量',
   'dataAnalysis.card.title.totalComment': '论文评论总量',
-  'dataAnalysis.card.title.totalShare': '分享总量',
+  'dataAnalysis.card.title.totalShare': '教师总人数',
   'dataAnalysis.card.yesterday': '较昨日',
   'dataAnalysis.contentPublishRatio': '内容发布比例',
   'dataAnalysis.popularAuthor': '热门论文作者榜单',

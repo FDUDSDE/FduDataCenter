@@ -26,8 +26,8 @@ const isValid = (item: string[], value: any, key: any) => {
       return item[0].includes(value)
   }
   if (key === '2') {
-    if (item[4])
-      return item[4].includes(value)
+    if (item[2])
+      return item[2].includes(value)
   }
   if (key ==='3') {
     if (item[3])

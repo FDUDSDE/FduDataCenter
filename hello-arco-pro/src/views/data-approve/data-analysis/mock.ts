@@ -44,8 +44,7 @@ setupMock({
           chartData: [
             // itemStyle for demo
             { name: '计算机学院', value: 25, itemStyle: { color: '#8D4EDA' } },
-            { name: '数学学院', value: 35, itemStyle: { color: '#165DFF' } },
-            { name: '物理学院', value: 40, itemStyle: { color: '#00B2FF' } },
+            { name: '微电子学院', value: 35, itemStyle: { color: '#165DFF' } },
           ],
         });
       }
@@ -81,10 +80,13 @@ setupMock({
         });
         return result;
       };
+      console.log([
+        generateLineData('纯文本'),
+        generateLineData('图文类'),
+      ])
       return successResponseWrap([
         generateLineData('纯文本'),
         generateLineData('图文类'),
-        generateLineData('视频类'),
       ]);
     });
 

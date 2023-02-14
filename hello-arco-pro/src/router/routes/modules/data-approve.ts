@@ -53,16 +53,17 @@ const DATAAPPROVE: AppRouteRecordRaw = {
     //   },
     // },
 
-    // {
-    //   path: 'data-analysis', // The midline path complies with SEO specifications
-    //   name: 'analysis',
-    //   component: () => import('@/views/data-approve/data-analysis/index.vue'),
-    //   meta: {
-    //     locale: '可视化分析',
-    //     requiresAuth: true,
-    //     roles: ['*'],
-    //   },
-    // }
+    {
+      path: 'data-analysis', // The midline path complies with SEO specifications
+      name: 'analysis',
+      component: () => import('@/views/data-approve/data-analysis/index.vue'),
+      meta: {
+        locale: '可视化分析',
+        requiresAuth: true,
+        roles: ['*'],
+        hideInMenu: true
+      },
+    }
 
     // {
     //   path: 'setting',

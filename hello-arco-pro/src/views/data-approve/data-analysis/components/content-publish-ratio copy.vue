@@ -2,7 +2,7 @@
   <a-spin :loading="loading" style="width: 100%">
     <a-card class="general-card" :header-style="{ paddingBottom: '14px' }">
       <template #title>
-        {{ $t('论文发布数') }}
+        {{ $t('项目立项数') }}
       </template>
       <!-- <template #extra>
         <a-link>{{ $t('workplace.viewMore') }}</a-link>
@@ -17,7 +17,7 @@
   import { ToolTipFormatterParams } from '@/types/echarts';
   import useLoading from '@/hooks/loading';
   import {
-    queryContentPublish,
+    queryContentPublishCopy,
     ContentPublishRecord,
   } from '@/api/visualization';
   import useChartOption from '@/hooks/chart-option';
@@ -115,14 +115,14 @@
           stack: 'one',
           type: 'bar',
           barWidth: 16,
-          color: isDark ? '#4A7FF7' : '#246EFF',
+          color: isDark ? '#4A7FF7' : '#663399',
         },
         {
           name: '微电子学院',
           data: imgChartsData.value,
           stack: 'one',
           type: 'bar',
-          color: isDark ? '#085FEF' : '#00F2FF',
+          color: isDark ? '#085FEF' : '#999999',
         },
       ],
     };
@@ -130,7 +130,8 @@
   const fetchData = async () => {
     setLoading(true);
     try {
-      const { data: chartData } = await queryContentPublish();
+      const { data: chartData } = await queryContentPublishCopy();
+      // console.log(chartData)
       xAxis.value = chartData[0].x;
       chartData.forEach((el: ContentPublishRecord) => {
         if (el.name === '纯文本') {
@@ -140,6 +141,8 @@
         }
         videoChartsData.value = el.y;
       });
+      // console.log(xAxis.value)
+      // console.log(textChartsData.value)
     } catch (err) {
       // you can report use errorHandler or other
     } finally {

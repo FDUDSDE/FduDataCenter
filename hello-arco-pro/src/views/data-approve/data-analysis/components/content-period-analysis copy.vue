@@ -2,7 +2,7 @@
   <a-spin :loading="loading" style="width: 100%">
     <a-card class="general-card" :header-style="{ paddingBottom: '16px' }">
       <template #title>
-        教师年龄分布
+        教师年龄 - 项目论文数分布
       </template>
       <Chart style="width: 100%; height: 370px" :option="chartOption" />
     </a-card>
@@ -108,7 +108,7 @@
       },
       series: [
         {
-          name: '人数',
+          name: '论文数',
           data: textChartsData.value,
           type: 'line',
           smooth: true,
@@ -121,6 +121,23 @@
             itemStyle: {
               borderWidth: 2,
               borderColor: '#E0E3FF',
+            },
+          },
+        },
+        {
+          name: '项目数',
+          data: imgChartsData.value,
+          type: 'line',
+          smooth: true,
+          showSymbol: false,
+          color: isDark ? '#A079DC' : '#00B2FF',
+          symbol: 'circle',
+          symbolSize: 10,
+          emphasis: {
+            focus: 'series',
+            itemStyle: {
+              borderWidth: 2,
+              borderColor: '#E2F2FF',
             },
           },
         },
@@ -166,7 +183,8 @@
         videoChartsData.value = el.value;
       });
       xAxis.value = ['20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '>80']
-      textChartsData.value = [105,256,206,105, 65,72,70]
+      textChartsData.value = [256,2711,4745,1184, 20,12,10]
+      imgChartsData.value = [0, 329, 1693, 1082, 167, 156, 65]
     } catch (err) {
       // you can report use errorHandler or other
     } finally {

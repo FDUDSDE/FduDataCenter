@@ -14,7 +14,7 @@
           <a-typography-text>数据智搜</a-typography-text>
         </span>
         <a-select v-model="typeOption" :options="['字段', '部门']" :style="{ width: '80px' }" placeholder="字段" />
-        <a-input-search v-model="keywords" @search="onSearch" :style="{ width: '620px', height: '50px', }" placeholder="工号、姓名、国籍..." />
+        <a-input-search v-model="keywords" @search="onSearch" :style="{ width: '620px', height: '50px', }" placeholder="工号、姓名、年龄..." />
       </div>
     </a-card>
 

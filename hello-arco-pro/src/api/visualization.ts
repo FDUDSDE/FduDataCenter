@@ -35,6 +35,10 @@ export function queryPopularAuthor() {
   return axios.get<PopularAuthorRes>('/api/popular-author/list');
 }
 
+export function queryPopularAuthorCopy() {
+  return axios.get<PopularAuthorRes>('/api/popular-author-copy/list');
+}
+
 export interface ContentPublishRecord {
   x: string[];
   y: number[];
@@ -43,6 +47,10 @@ export interface ContentPublishRecord {
 
 export function queryContentPublish() {
   return axios.get<ContentPublishRecord[]>('/api/content-publish');
+}
+
+export function queryContentPublishCopy() {
+  return axios.get<ContentPublishRecord[]>('/api/content-publish-copy');
 }
 
 export function queryContentPeriodAnalysis() {

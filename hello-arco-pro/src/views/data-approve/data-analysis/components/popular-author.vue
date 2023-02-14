@@ -4,9 +4,9 @@
       <template #title>
         {{ $t('dataAnalysis.popularAuthor') }}
       </template>
-      <template #extra>
+      <!-- <template #extra>
         <a-link>{{ $t('workplace.viewMore') }}</a-link>
-      </template>
+      </template> -->
       <a-table
         :data="tableData.list"
         :pagination="false"
@@ -33,14 +33,14 @@
             }"
           >
           </a-table-column>
-          <a-table-column
+          <!-- <a-table-column
             :title="$t('dataAnalysis.popularAuthor.column.click')"
             data-index="clickCount"
             :sortable="{
               sortDirections: ['ascend', 'descend'],
             }"
           >
-          </a-table-column>
+          </a-table-column> -->
         </template>
       </a-table>
     </a-card>

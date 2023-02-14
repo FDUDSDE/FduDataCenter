@@ -13,7 +13,7 @@
       <a-space direction="vertical">
         <a-checkbox :model-value="checkedAll" :indeterminate="indeterminate" @change="handleChangeAll">全选
     </a-checkbox>
-        <a-checkbox-group v-model="boxData" >
+        <a-checkbox-group v-model="boxData" @change="handleBoxChange">
           <template
             v-for="item in ['教师基本信息总数据量 880 条', '论文发表信息总数据量 8906 条', '基金项目信息总数据量 3493 条']"
             :key="item">
@@ -46,13 +46,13 @@
     <a-card class="general-card" :style="{ marginBottom: '20px', height: '150px' }" :title="$t('二、全局搜索')">
       <a-row style="margin-top: -15px">
         <span style="margin-left: 30px">
-          从数据源中全局搜素，留空默认获取全部数据
+          从数据源中全局搜索，留空默认获取全部数据
         </span>
       </a-row>
 
       <a-row style="margin-top: 12px">
         <span style="margin-left: 30px">
-          <a-input-search @search="onSearch" :style="{ width: '480px', height: '35px', }" placeholder="张三"
+          <a-input-search v-model="keywords" @search="onSearch" :style="{ width: '480px', height: '35px', }" placeholder="如输入工号：8298"
             search-button>
             <template #button-icon>
               <icon-search />
@@ -70,23 +70,25 @@
     <a-card class="general-card"  :title="$t('三、数据浏览与筛选')">
       <a-row style="margin-top: -15px">
         <span style="margin-left: 30px">
-          可以任意规则进行数据筛选，可对结果数据进行下载或进一步分析
+          可对结果数据进行排序和筛选，可对结果数据进行下载或进一步分析
         </span>
       </a-row>
 
 
       
 
-      <a-row style="margin-top: 5px">
+      <!-- <a-row style="margin-top: 5px">
         <span style="margin-left: 25px">
           <a-image width="500" height="170" src="../src/assets/images/数据筛选.png" />
         </span>
-      </a-row>
+      </a-row> -->
 
       <a-tabs v-model:active-key="tabKey" @tab-click="tabChange">
         <a-tab-pane v-for="key in ['1', '2', '3']" :key="key" :title="titles[key]">
           <a-table row-key="id" :loading="loading" :pagination="pagination"
-            :columns="(cloneColumns as TableColumnData[])" :data="renderData" :bordered="false" :size="size"
+            :columns="(columns as TableColumnData[])" 
+            :filter-icon-align-left="true"
+            :data="renderData" :bordered="false" :size="size"
             @page-change="onPageChange">
           </a-table>
         </a-tab-pane>
@@ -95,9 +97,9 @@
       <a-row style="margin-top: 30px ">
         
         <span style="left: 770px">
-          
+          <a-button type="outline"  style="left: 1150px ">数据下载</a-button>
           <router-link style="text-decoration: none" to='/data-approve/data-analysis'>
-            <a-button type="outline"  style="left: 1470px ">下一步分析</a-button>
+            <a-button type="primary"  style="left: 900px ">下一步分析</a-button>
           </router-link>
 
         </span>
@@ -125,9 +127,9 @@ type SizeProps = 'mini' | 'small' | 'medium' | 'large';
 type Column = TableColumnData & { checked?: true };
 const tabKey = ref('1')
 const indeterminate = ref(false)
-const checkedAll = ref(false)
-const boxData = ref([])
-
+const checkedAll = ref(true)
+const boxData = ref(['教师基本信息总数据量 880 条', '论文发表信息总数据量 8906 条', '基金项目信息总数据量 3493 条'])
+const keywords = ref()
 const handleChangeAll = (value) => {
   indeterminate.value = false;
   if (value) {
@@ -138,6 +140,20 @@ const handleChangeAll = (value) => {
     boxData.value = []
   }
 }
+
+const handleBoxChange = (values) => {
+      if (values.length === 3) {
+        checkedAll.value = true
+        indeterminate.value = false;
+      } else if (values.length === 0) {
+        checkedAll.value = false
+        indeterminate.value = false;
+      } else {
+        checkedAll.value = false
+        indeterminate.value = true;
+      }
+    }
+
 const titles:any = reactive({
   1: '教师基本信息',
   2: '发表论文情况',
@@ -166,6 +182,7 @@ const size = ref<SizeProps>('mini');
 const basePagination: Pagination = {
   current: 1,
   pageSize: 15,
+  showTotal: true
 };
 const pagination = reactive({
   ...basePagination,
@@ -190,8 +207,8 @@ const densityList = computed(() => [
 ]);
 
 const tabChange = async (key: any) => {
-  console.log(key)
-  await fetchData({ current: 1, pageSize: 15, key })
+  console.log(key, keywords)
+  await fetchData({ current: 1, pageSize: 15, key, value: keywords.value})
 }
 
 const onSearch = async (value: any) => {
@@ -260,6 +277,9 @@ const fetchData = async (
     pagination.total = total;
 
     columns.value = list[0].map((item: any) => ({ title: item, dataIndex: item, width: 140, }))
+    console.log(columns.value)
+    console.log('tabkey', params.key)
+
     renderData.value = list.slice(1).map((row: { [x: string]: any; }, index: any) => {
       const obj: any = {}
       for (let i = 0; i < list[0].length; i += 1) {
@@ -269,6 +289,177 @@ const fetchData = async (
       return obj
     })
     console.log(renderData)
+    if (tabKey.value==='1') {
+      columns.value = [
+        {
+            "title": "工号",
+            "dataIndex": "工号",
+            "width": 140,
+            sortable: {
+              sortDirections: ['ascend', 'descend']
+            }
+        },
+        {
+            "title": "姓名",
+            "dataIndex": "姓名",
+            "width": 140
+        },
+        {
+            title: "性别",
+            dataIndex: "性别",
+            width: 140,
+            filterable: {
+              filters: [{
+                text: '男',
+                value: '男',
+              }, {
+                text: '女',
+                value: '女',
+              },],
+              filter: (value, row) => row.性别 === value,
+            }
+        },
+        {
+            "title": "年龄",
+            "dataIndex": "年龄",
+            "width": 140,
+            sortable: {
+              sortDirections: ['ascend', 'descend']
+            }
+        },
+        {
+            "title": "国籍",
+            "dataIndex": "国籍",
+            "width": 140
+        },
+        {
+            "title": "民族",
+            "dataIndex": "民族",
+            "width": 140
+        },
+        {
+            "title": "出生地",
+            "dataIndex": "出生地",
+            "width": 140
+        },
+        {
+            "title": "单位名称",
+            "dataIndex": "单位名称",
+            "width": 140,
+            filterable: {
+              filters: [{
+                text: '计算机科学技术学院',
+                value: '计算机科学技术学院',
+              }, {
+                text: '微电子学院',
+                value: '微电子学院',
+              },],
+              filter: (value, row) => row.单位名称 === value,
+            }
+        },
+        {
+            "title": "专业技术职务名称",
+            "dataIndex": "专业技术职务名称",
+            "width": 140
+        },
+        {
+            "title": "职称级别",
+            "dataIndex": "职称级别",
+            "width": 140
+        }
+      ]
+    } else if (tabKey.value === '2') {
+      columns.value = [
+        {
+            "title": "论文标题",
+            "dataIndex": "论文标题",
+            "width": 140
+        },
+        {
+            "title": "期刊名称",
+            "dataIndex": "期刊名称",
+            "width": 140
+        },
+        {
+            "title": "工号",
+            "dataIndex": "工号",
+            "width": 140
+        },
+        {
+            "title": "出版年份",
+            "dataIndex": "出版年份",
+            "width": 140,
+            sortable: {
+              sortDirections: ['ascend', 'descend']
+            }
+        }
+      ]
+    } else if (tabKey.value === '3') {
+      columns.value = [
+        {
+            "title": "项目编号",
+            "dataIndex": "项目编号",
+            "width": 140,
+            sortable: {
+              sortDirections: ['ascend', 'descend']
+            }
+        },
+        {
+            "title": "项目性质",
+            "dataIndex": "项目性质",
+            "width": 140,
+            filterable: {
+              filters: [{
+                text: '纵向项目',
+                value: '纵向项目',
+              }, {
+                text: '横向项目',
+                value: '横向项目',
+              },],
+              filter: (value, row) => row.项目性质 === value,
+            }
+        },
+        {
+            "title": "项目名称",
+            "dataIndex": "项目名称",
+            "width": 140
+        },
+        {
+            "title": "工号",
+            "dataIndex": "工号",
+            "width": 140,
+            sortable: {
+              sortDirections: ['ascend', 'descend']
+            }
+        },
+        {
+            "title": "姓名",
+            "dataIndex": "姓名",
+            "width": 140
+        },
+        {
+            "title": "项目分类",
+            "dataIndex": "项目分类",
+            "width": 140
+        },
+        {
+            "title": "履行合同金额",
+            "dataIndex": "履行合同金额",
+            "width": 140,
+            sortable: {
+              sortDirections: ['ascend', 'descend']
+            }
+        },
+        {
+            "title": "立项时间",
+            "dataIndex": "立项时间",
+            "width": 140,
+            sortable: {
+              sortDirections: ['ascend', 'descend']
+            }
+        }
+    ]
+    }
   } catch (err) {
     // you can report use errorHandler or other
   } finally {
@@ -283,7 +474,8 @@ const search = () => {
   } as unknown as PolicyParams);
 };
 const onPageChange = (current: number) => {
-  fetchData({ ...basePagination, current, key: tabKey.value });
+  pagination.current = current
+  // fetchData({ ...basePagination, current, key: tabKey.value, value: keywords.value});
 };
 
 fetchData(); 

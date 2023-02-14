@@ -11,6 +11,20 @@
         <div>
           <a-grid :cols="24" :col-gap="16" :row-gap="16">
             <a-grid-item
+              :span="{ xs: 24, sm: 24, md: 24, lg: 24, xl: 16, xxl: 12 }"
+            >
+            <ContentPeriodAnalysis />
+            </a-grid-item>
+            <a-grid-item
+              :span="{ xs: 24, sm: 24, md: 24, lg: 24, xl: 16, xxl: 12 }"
+            >
+            <ContentPeriodAnalysisCopy />
+            </a-grid-item>
+          </a-grid>
+        </div>
+        <div>
+          <a-grid :cols="24" :col-gap="16" :row-gap="16">
+            <a-grid-item
               :span="{ xs: 24, sm: 24, md: 24, lg: 24, xl: 16, xxl: 16 }"
             >
               <ContentPublishRatio />
@@ -23,8 +37,20 @@
           </a-grid>
         </div>
         <div>
-          <ContentPeriodAnalysis />
+          <a-grid :cols="24" :col-gap="16" :row-gap="16">
+            <a-grid-item
+              :span="{ xs: 24, sm: 24, md: 24, lg: 24, xl: 16, xxl: 16 }"
+            >
+              <ContentPublishRatioCopy />
+            </a-grid-item>
+            <a-grid-item
+              :span="{ xs: 24, sm: 24, md: 24, lg: 24, xl: 8, xxl: 8 }"
+            >
+              <PopularAuthorCopy />
+            </a-grid-item>
+          </a-grid>
         </div>
+
       </a-space>
     </a-space>
   </div>
@@ -35,6 +61,9 @@
   import ContentPeriodAnalysis from './components/content-period-analysis.vue';
   import ContentPublishRatio from './components/content-publish-ratio.vue';
   import PopularAuthor from './components/popular-author.vue';
+  import PopularAuthorCopy from './components/popular-author copy.vue';
+  import ContentPublishRatioCopy from './components/content-publish-ratio copy.vue';
+  import ContentPeriodAnalysisCopy from './components/content-period-analysis copy.vue';
 </script>
 
 <script lang="ts">

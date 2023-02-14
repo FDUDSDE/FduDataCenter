@@ -10,7 +10,7 @@
             animation
             show-group-separator
           />
-          <div class="desc">
+          <!-- <div class="desc">
             <a-typography-text type="secondary" class="label">
               {{ $t('dataAnalysis.card.yesterday') }}
             </a-typography-text>
@@ -18,7 +18,7 @@
               {{ renderData.growth }}
               <icon-arrow-rise />
             </a-typography-text>
-          </div>
+          </div> -->
         </div>
         <div class="chart">
           <Chart v-if="!loading" :option="chartOption" />

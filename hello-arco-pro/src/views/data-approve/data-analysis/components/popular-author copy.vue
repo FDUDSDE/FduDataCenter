@@ -2,11 +2,11 @@
   <a-spin :loading="loading" style="width: 100%">
     <a-card class="general-card" :header-style="{ paddingBottom: '14px' }">
       <template #title>
-        {{ $t('dataAnalysis.popularAuthor') }}
+        项目数量排行
       </template>
-      <template #extra>
+      <!-- <template #extra>
         <a-link>{{ $t('workplace.viewMore') }}</a-link>
-      </template>
+      </template> -->
       <a-table
         :data="tableData.list"
         :pagination="false"
@@ -21,12 +21,12 @@
           >
           </a-table-column>
           <a-table-column
-            :title="$t('dataAnalysis.popularAuthor.column.author')"
+            title="项目负责人"
             data-index="author"
           >
           </a-table-column>
           <a-table-column
-            :title="$t('dataAnalysis.popularAuthor.column.content')"
+            title="项目数量"
             data-index="contentCount"
             :sortable="{
               sortDirections: ['ascend', 'descend'],
@@ -50,14 +50,14 @@
 <script lang="ts" setup>
   import { ref } from 'vue';
   import useLoading from '@/hooks/loading';
-  import { queryPopularAuthor, PopularAuthorRes } from '@/api/visualization';
+  import { queryPopularAuthorCopy, PopularAuthorRes } from '@/api/visualization';
 
   const { loading, setLoading } = useLoading();
   const tableData = ref<PopularAuthorRes>({ list: [] });
   const fetchData = async () => {
     try {
       setLoading(true);
-      const { data } = await queryPopularAuthor();
+      const { data } = await queryPopularAuthorCopy();
       tableData.value = data;
     } catch (err) {
       // you can report use errorHandler or other
