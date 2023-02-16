@@ -183,8 +183,8 @@
         videoChartsData.value = el.value;
       });
       xAxis.value = ['20-30', '30-40', '40-50', '50-60', '60-70', '70-80', '>80']
-      textChartsData.value = [256,2711,4745,1184, 20,12,10]
-      imgChartsData.value = [0, 329, 1693, 1082, 167, 156, 65]
+      textChartsData.value = [0,1369,2252,1578, 0,0,0]
+      imgChartsData.value = [0, 320, 841, 481, 105, 114, 47]
     } catch (err) {
       // you can report use errorHandler or other
     } finally {
