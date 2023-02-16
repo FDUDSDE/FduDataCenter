@@ -52,7 +52,7 @@
 
       <a-row style="margin-top: 12px">
         <span style="margin-left: 30px">
-          <a-input-search v-model="keywords" @search="onSearch" :style="{ width: '480px', height: '35px', }" placeholder="如输入工号：8298"
+          <a-input-search v-model="keywords" @search="onSearch" :style="{ width: '480px', height: '35px', }" placeholder="如输入工号：08298"
             search-button>
             <template #button-icon>
               <icon-search />
