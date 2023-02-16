@@ -307,17 +307,7 @@ const fetchData = async (
         {
             title: "性别",
             dataIndex: "性别",
-            width: 140,
-            filterable: {
-              filters: [{
-                text: '男',
-                value: '男',
-              }, {
-                text: '女',
-                value: '女',
-              },],
-              filter: (value, row) => row.性别 === value,
-            }
+            width: 140
         },
         {
             "title": "年龄",
@@ -345,17 +335,7 @@ const fetchData = async (
         {
             "title": "单位名称",
             "dataIndex": "单位名称",
-            "width": 140,
-            filterable: {
-              filters: [{
-                text: '计算机科学技术学院',
-                value: '计算机科学技术学院',
-              }, {
-                text: '微电子学院',
-                value: '微电子学院',
-              },],
-              filter: (value, row) => row.单位名称 === value,
-            }
+            "width": 140
         },
         {
             "title": "专业技术职务名称",
@@ -407,17 +387,7 @@ const fetchData = async (
         {
             "title": "项目性质",
             "dataIndex": "项目性质",
-            "width": 140,
-            filterable: {
-              filters: [{
-                text: '纵向项目',
-                value: '纵向项目',
-              }, {
-                text: '横向项目',
-                value: '横向项目',
-              },],
-              filter: (value, row) => row.项目性质 === value,
-            }
+            "width": 140
         },
         {
             "title": "项目名称",
